@@ -1,0 +1,32 @@
+{
+  "name": "flex-html-pdf-sample-service",
+  "version": "6.0.0",
+  "description": "Kinvey Flex Service for HTML to PDF conversion.",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bilger-progress/flex-html-pdf-sample-service.git"
+  },
+  "keywords": [
+    "PDF",
+    "HTML",
+    "Kinvey",
+    "Flex",
+    "Service"
+  ],
+  "author": "Bilger Yahov @ Kinvey by Progress",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bilger-progress/flex-html-pdf-sample-service/issues"
+  },
+  "homepage": "https://github.com/bilger-progress/flex-html-pdf-sample-service#readme",
+  "dependencies": {
+    "kinvey-flex-sdk": "3.2.1",
+    "phantomjscloud": "3.6.0",
+    "request": "2.88.0",
+    "request-promise": "4.2.2"
+  }
+}
