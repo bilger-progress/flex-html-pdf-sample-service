@@ -1,22 +1,20 @@
 "use strict"
 
-// TODO: Set your API Key.
 const phantomJsCloud = require("phantomjscloud");
+
+// TODO: Set the API key for your PhantomJs Cloud service.
 const browserApi = new phantomJsCloud.BrowserApi("xxx");
 
-/**
- * Takes the screen-shot and gives back the valid data.
- */
-module.exports = (path) => {
+module.exports = (url) => {
     return new Promise((resolve, reject) => {
         browserApi.requestSingle({
-            url: path,
+            url,
             renderType: "pdf"
-        }, (requestSingleError, requestSingleData) => {
-            if (requestSingleError) {
-                return reject(requestSingleError);
+        }, (error, data) => {
+            if (error) {
+                return reject(error);
             }
-            return resolve(requestSingleData);
+            return resolve(data);
         });
     });
 };

@@ -1,6 +1,6 @@
 {
   "name": "flex-html-pdf-sample-service",
-  "version": "6.0.0",
+  "version": "8.0.0",
   "description": "Kinvey Flex Service for HTML to PDF conversion.",
   "main": "./index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "kinvey-flex-sdk": "3.2.1",
     "phantomjscloud": "3.6.0",
     "request": "2.88.0",
-    "request-promise": "4.2.2"
+    "request-promise": "4.2.2",
+    "bluebird": "3.5.3"
   }
 }

@@ -2,48 +2,38 @@
 
 const requestPromise = require("request-promise");
 
-// TODO: Set your Kinvey App Key.
-// Or you might want to get it from the Request Context of Flex?
-const KINVEY_APP_KEY = "kid_xxx";
-
-/**
- * Uploads the screen-shot to Kinvey Files Store.
- * Google Cloud Storage.
- */
-module.exports = (authData, fileData) => {
+module.exports = (authInfo, fileInfo, kinveyAppKey) => {
     return new Promise((resolve, reject) => {
         requestPromise({
             method: "POST",
-            uri: "https://baas.kinvey.com/blob/" + KINVEY_APP_KEY + "/?tls=true",
+            uri: "https://baas.kinvey.com/blob/" + kinveyAppKey + "/?tls=true",
             body: {
                 mimeType: "application/pdf",
                 _public: false,
                 _acl: {
                     gr: false
                 },
-                size: fileData["size"]
+                size: fileInfo.size
             },
             json: true,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": authData["userToken"],
+                "Authorization": authInfo.token,
                 "X-Kinvey-API-Version": 3,
                 "X-Kinvey-Content-Type": "application/pdf"
             }
-        }).then((kinveyFilesData) => {
+        }).then((data) => {
             return requestPromise({
                 method: "PUT",
-                uri: kinveyFilesData["_uploadURL"],
-                body: fileData["actualFile"],
+                uri: data._uploadURL,
+                body: fileInfo.file,
                 headers: {
                     "Content-Type": "application/pdf",
-                    "Content-Length": fileData["size"]
+                    "Content-Length": fileInfo.size
                 }
             });
-        }).then((googleStorageData) => {
-            return resolve(googleStorageData);
-        }).catch((generalError) => {
-            return reject(generalError);
-        });
+        })
+            .then(data => resolve(data))
+            .catch(error => reject(error));
     });
 };
